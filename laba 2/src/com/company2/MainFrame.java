@@ -15,6 +15,20 @@ public class MainFrame extends JFrame {
     private Double result;
     //Сумма результатов
     private Double Sum = 0.;
+    // Текстовые поля для считывания значений переменных,
+// как компоненты, совместно используемые в различных методах
+    private JTextField textFieldX;
+    private JTextField textFieldY;
+    private JTextField textFieldZ;
+    // Текстовое поле для отображения результата,
+    // как компонент, совместно используемый в различных методах
+    private JTextField textFieldResult;
+    //текстовое поле для вывода суммы результатов(M+)
+    private JTextField textFieldM;
+    // Группа радио-кнопок для обеспечения уникальности выделения в группе
+    private ButtonGroup radioButtons = new ButtonGroup();
+    // Контейнер для отображения радио-кнопок
+    private Box hboxFormulaType = Box.createHorizontalBox();
     private int formulaId = 1;
 
     // Формула №1 для рассчѐта
