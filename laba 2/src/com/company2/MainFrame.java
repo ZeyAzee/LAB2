@@ -156,6 +156,30 @@ public class MainFrame extends JFrame {
                 textFieldM.setText("0");
             }
         });
-     
+        Box hboxButtons = Box.createHorizontalBox();
+        hboxButtons.add(Box.createHorizontalGlue());
+        hboxButtons.add(buttonCalc);
+        hboxButtons.add(Box.createHorizontalStrut(30));
+        hboxButtons.add(buttonReset);
+        hboxButtons.add(Box.createHorizontalGlue());
+        hboxButtons.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+
+        Box MboxButtons =Box.createHorizontalBox();
+        MboxButtons.add(Box.createHorizontalGlue());
+        MboxButtons.add(buttonM);
+        MboxButtons.add(Box.createHorizontalStrut(100));
+        MboxButtons.add(buttonMC);
+        MboxButtons.add(Box.createHorizontalGlue());
+        MboxButtons.setBorder(BorderFactory.createLineBorder(Color.magenta));
+// Связать области воедино в компоновке BoxLayout
+        Box contentBox = Box.createVerticalBox();
+        contentBox.add(Box.createVerticalGlue());
+        contentBox.add(hboxFormulaType);
+        contentBox.add(hboxVariables);
+        contentBox.add(hboxResult);
+        contentBox.add(hboxButtons);
+        contentBox.add(MboxButtons);
+        contentBox.add(Box.createVerticalGlue());
+        getContentPane().add(contentBox, BorderLayout.CENTER);
     }
 }
