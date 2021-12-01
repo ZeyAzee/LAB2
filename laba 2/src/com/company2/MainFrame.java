@@ -43,6 +43,18 @@ public class MainFrame extends JFrame {
         return Math.pow(1+Math.pow(x,2),1/y)/Math.pow(Math.E,Math.sin(z)+x);
     }
 
+    // Вспомогательный метод для добавления кнопок на панель
+    private void addRadioButton(String buttonName, final int formulaId) {
+        JRadioButton button = new JRadioButton(buttonName);
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+                MainFrame.this.formulaId = formulaId;
+            }
+        });
+        radioButtons.add(button);
+        hboxFormulaType.add(button);
+    }
+
     // Конструктор класса
     public MainFrame() {
         super("Вычисление формулы");
@@ -54,7 +66,9 @@ public class MainFrame extends JFrame {
         hboxFormulaType.add(Box.createHorizontalGlue());
         addRadioButton("Формула 1", 1);
         addRadioButton("Формула 2", 2);
-
+        radioButtons.setSelected(radioButtons.getElements().nextElement().getModel(), true);
+        hboxFormulaType.add(Box.createHorizontalGlue());
+        hboxFormulaType.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
 // Создать область с полями ввода для X и Y
         JLabel labelForX = new JLabel("X:");
         textFieldX = new JTextField("0", 5);
@@ -98,5 +112,34 @@ public class MainFrame extends JFrame {
         hboxResult.add(textFieldM);
         hboxResult.add(Box.createHorizontalGlue());
         hboxResult.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-
+// Создать область для кнопок
+        JButton buttonCalc = new JButton("Вычислить");
+        buttonCalc.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+                try {
+                    Double x = Double.parseDouble(textFieldX.getText());
+                    Double y = Double.parseDouble(textFieldY.getText());
+                    Double z = Double.parseDouble(textFieldZ.getText());
+                    if (formulaId == 1)
+                        result = calculate1(x, y, z);
+                    else
+                        result = calculate2(x, y, z);
+                    textFieldResult.setText(result.toString());
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(MainFrame.this,
+                            "Ошибка в формате записи числа с плавающей точкой", "Ошибочный формат числа",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+        JButton buttonReset = new JButton("Очистить поля");
+        buttonReset.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+                textFieldX.setText("0");
+                textFieldY.setText("0");
+                textFieldZ.setText("0");
+                textFieldResult.setText("0");
+            }
+        });
+    }
 }
