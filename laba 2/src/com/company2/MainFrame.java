@@ -141,5 +141,21 @@ public class MainFrame extends JFrame {
                 textFieldResult.setText("0");
             }
         });
+        JButton buttonM = new JButton("M+");
+        buttonM.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+                Sum += result;
+                textFieldM.setText(Sum.toString());
+            }
+        });
+        JButton buttonMC=new JButton("MC");
+        buttonMC.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Sum=0.;
+                textFieldM.setText("0");
+            }
+        });
+     
     }
 }
